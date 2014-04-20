@@ -1,0 +1,26 @@
+<config>
+  <executableName>${app.executable}</executableName>
+  <mainClass>${app.mainclass}</mainClass>
+  <os>ios</os>
+  <arch>thumbv7</arch>
+  <resources>
+    <resource>
+      <directory>resources</directory>
+    </resource>
+  </resources>
+  <target>ios</target>
+  <iosInfoPList>Info.plist.xml</iosInfoPList>
+  <!-- added for Github API / Jackson / ... -->
+  <forceLinkClasses>
+  	<pattern>org.apache.harmony.xnet.provider.jsse.OpenSSLSocketFactoryImpl</pattern>
+  	<pattern>org.apache.harmony.xnet.provider.jsse.OpenSSLProvider</pattern>
+  	<pattern>org.apache.harmony.security.provider.cert.DRLCertFactory</pattern>
+  	<pattern>com.android.org.bouncycastle.jce.provider.BouncyCastleProvider</pattern>
+  	<pattern>org.apache.harmony.security.provider.crypto.CryptoProvider</pattern>
+  	<pattern>org.apache.harmony.xnet.provider.jsse.JSSEProvider</pattern>
+  	<pattern>com.android.org.bouncycastle.jce.provider.JDKKeyStore</pattern>
+  	<pattern>org.apache.harmony.security.provider.cert.X509CertFactoryImpl</pattern>
+  	<pattern>com.android.org.bouncycastle.jce.provider.PKIXCertPathValidatorSpi</pattern>
+  	<pattern>org.apache.harmony.xnet.provider.jsse.OpenSSLMessageDigestJDK</pattern>
+  </forceLinkClasses>
+</config>
