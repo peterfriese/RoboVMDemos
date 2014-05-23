@@ -7,13 +7,10 @@ import java.util.List;
 import org.kohsuke.github.GHIssue;
 import org.kohsuke.github.GHIssueState;
 import org.kohsuke.github.GHRepository;
-import org.robovm.apple.foundation.NSArray;
 import org.robovm.apple.foundation.NSIndexPath;
-import org.robovm.apple.foundation.NSString;
-import org.robovm.apple.uikit.UIScrollView;
+import org.robovm.apple.uikit.NSIndexPathExtensions;
 import org.robovm.apple.uikit.UITableView;
 import org.robovm.apple.uikit.UITableViewCell;
-import org.robovm.apple.uikit.UITableViewCellAccessoryType;
 import org.robovm.apple.uikit.UITableViewController;
 import org.robovm.objc.ObjCClass;
 
@@ -52,12 +49,6 @@ public class IssuesListViewController extends UITableViewController {
 		super();
 		this.setTitle("Issues");
 	}
-	
-	@Override
-	protected void dispose(boolean finalizing) {
-		super.dispose(finalizing);
-		System.out.println("DISPOSE IssuesListViewController");
-	}
 
 	@Override
 	public void viewDidLoad() {
@@ -74,53 +65,10 @@ public class IssuesListViewController extends UITableViewController {
 	@Override
 	public UITableViewCell getRowCell(UITableView tableView, NSIndexPath indexPath) {
 		UITableViewCell cell = (UITableViewCell) tableView.dequeueReusableCell(CELL_IDENTIFIER);
-		int row = (int) indexPath.getIndexAt(1);
+		int row = (int) NSIndexPathExtensions.getRow(indexPath);
 		GHIssue issue = getIssues().get(row);
 		cell.getTextLabel().setText(issue.getTitle());
 		System.out.println(issue.getTitle());
 		return cell;
 	}
-	
-	// RoboVM quirks
-	
-	@Override
-	public void didScroll(UIScrollView scrollView) {
-		System.out.println("You scrolled");
-	}
-	
-	@Override
-	public NSArray<NSString> getSectionIndexTitles(UITableView tableView) {
-		System.out.println("Index titles");
-		return null;
-	}
-	
-	@Override
-	public double getEstimatedRowHeight(UITableView tableView,
-			NSIndexPath indexPath) {
-		return 44.0;
-	}
-	
-	@Override
-	public UITableViewCellAccessoryType getRowAccessoryType(
-			UITableView tableView, NSIndexPath indexPath) {
-		return UITableViewCellAccessoryType.None;
-	}
-	
-	@Override
-	public boolean canEditRow(UITableView tableView, NSIndexPath indexPath) {
-		return false;
-	}
-	
-	@Override
-	public void willDisplayCell(UITableView tableView, UITableViewCell cell,
-			NSIndexPath indexPath) {
-	}
-	
-	@Override
-	public NSIndexPath willSelectRow(UITableView tableView,
-			NSIndexPath indexPath) {
-		// TODO Auto-generated method stub
-		return indexPath;
-	}
-
 }

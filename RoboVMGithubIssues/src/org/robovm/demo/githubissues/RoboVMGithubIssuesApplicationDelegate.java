@@ -7,6 +7,7 @@ import org.robovm.apple.uikit.UIApplication;
 import org.robovm.apple.uikit.UIApplicationDelegateAdapter;
 import org.robovm.apple.uikit.UIColor;
 import org.robovm.apple.uikit.UINavigationController;
+import org.robovm.apple.uikit.UINavigationControllerDelegateAdapter;
 import org.robovm.apple.uikit.UIScreen;
 import org.robovm.apple.uikit.UIWindow;
 
@@ -24,6 +25,9 @@ public class RoboVMGithubIssuesApplicationDelegate extends
 		UINavigationController navigationController = new UINavigationController(
 				repositoriesListViewController);
 		navigationController.addStrongRef(repositoriesListViewController);
+		// For unknown reasons a custom UINavigationControllerDelegate has to be set
+		// for the UINavigationController to work properly
+		navigationController.setDelegate(new UINavigationControllerDelegateAdapter() {});
 		window.setRootViewController(navigationController);
 
 		window.setBackgroundColor(UIColor.colorWhite());
